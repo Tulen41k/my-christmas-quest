@@ -1,32 +1,26 @@
+// src/components/TaskTypes/SimpleInputTask.js
+
 import React, { useState } from 'react';
 import TaskLayout from '../TaskLayout';
 
-export default function CipherTask({ task, onTaskComplete }) {
-  const [userAnswer, setUserAnswer] = useState('');
+export default function SimpleInputTask({ task, onTaskComplete }) {
+  const [answer, setAnswer] = useState('');
   const [feedback, setFeedback] = useState('');
 
   const handleSubmit = () => {
     const correct = task.correctAnswer.toLowerCase();
-    const answer = userAnswer.trim().toLowerCase();
+    const userAnswer = answer.trim().toLowerCase();
 
-    if (answer === correct) {
-      setFeedback('Верно! 🎉');
-      setTimeout(() => onTaskComplete(task.nextClue), 1200);
+    if (userAnswer === correct) {
+      setFeedback('Верно! ✅');
+      setTimeout(() => onTaskComplete(task.nextClue), 1000);
     } else {
-      setFeedback('Ой, кажется, это не верно.');
+      setFeedback(task.wrongMessage || 'Неправильно. Попробуй ещё раз.');
     }
-  };
-
-  const handleInputChange = (e) => {
-    setUserAnswer(e.target.value);
-    // Сбрасываем сообщение при новом вводе
-    if (feedback) setFeedback('');
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      handleSubmit();
-    }
+    if (e.key === 'Enter') handleSubmit();
   };
 
   return (
@@ -35,28 +29,14 @@ export default function CipherTask({ task, onTaskComplete }) {
         {task.description}
       </p>
 
-      {/* Зашифрованное число */}
-      <div style={{ 
-        fontSize: '2rem', 
-        fontWeight: 'bold', 
-        margin: '1.5rem 0', 
-        textAlign: 'center',
-        color: '#2c3e50'
-      }}>
-        {task.encoded}
-      </div>
-
-      {/* Картинка с шифром */}
       {task.image && (
         <div style={{ textAlign: 'center', margin: '1.5rem 0' }}>
           <img
             src={task.image}
-            alt={task.imageAlt || "Подсказка"}
+            alt={task.imageAlt || 'Подсказка'}
             style={{
-              maxWidth: '90%',
+              maxWidth: '100%',
               height: 'auto',
-              maxHeight: '40vh',
-              border: '1px solid #eee',
               borderRadius: '8px',
               boxShadow: '0 2px 6px rgba(0,0,0,0.1)'
             }}
@@ -64,22 +44,20 @@ export default function CipherTask({ task, onTaskComplete }) {
         </div>
       )}
 
-      {/* Поле ввода */}
-      <div style={{ marginTop: '1.5rem', textAlign: 'center' }}>
+      <div style={{ textAlign: 'center', marginTop: '1.5rem' }}>
         <input
           type="text"
-          value={userAnswer}
-          onChange={handleInputChange}
+          value={answer}
+          onChange={(e) => setAnswer(e.target.value)}
           onKeyPress={handleKeyPress}
-          placeholder="Введите слово..."
+          placeholder={task.placeholder || 'Введите ответ...'}
           style={{
             padding: '0.6rem 1rem',
             fontSize: '1.1rem',
             width: '240px',
             textAlign: 'center',
             border: '2px solid #ccc',
-            borderRadius: '8px',
-            outline: 'none'
+            borderRadius: '8px'
           }}
         />
         <br />
@@ -100,15 +78,13 @@ export default function CipherTask({ task, onTaskComplete }) {
         </button>
       </div>
 
-      {/* Обратная связь */}
       {feedback && (
         <p
           style={{
             marginTop: '1rem',
             textAlign: 'center',
             color: feedback.includes('Верно') ? 'green' : 'red',
-            fontWeight: 'bold',
-            fontSize: '1.1rem'
+            fontWeight: 'bold'
           }}
         >
           {feedback}
