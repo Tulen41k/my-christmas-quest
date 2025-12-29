@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/my-christmas-quest/static/css/main.29e26a6f.css",
-    "main.js": "/my-christmas-quest/static/js/main.e00bb446.js",
+    "main.js": "/my-christmas-quest/static/js/main.81ea65e8.js",
     "static/js/453.cd2f8d21.chunk.js": "/my-christmas-quest/static/js/453.cd2f8d21.chunk.js",
     "index.html": "/my-christmas-quest/index.html",
     "main.29e26a6f.css.map": "/my-christmas-quest/static/css/main.29e26a6f.css.map",
-    "main.e00bb446.js.map": "/my-christmas-quest/static/js/main.e00bb446.js.map",
+    "main.81ea65e8.js.map": "/my-christmas-quest/static/js/main.81ea65e8.js.map",
     "453.cd2f8d21.chunk.js.map": "/my-christmas-quest/static/js/453.cd2f8d21.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.29e26a6f.css",
-    "static/js/main.e00bb446.js"
+    "static/js/main.81ea65e8.js"
   ]
 }
